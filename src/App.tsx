@@ -1,14 +1,14 @@
-import React, { ChangeEvent } from "react";
-
 import "./App.css";
-import { UploadShrink } from "./UploadShrink";
-import { Animation } from "./Animation";
 
+import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
+const location = new ReactLocation();
+import { routes } from "./routes";
 function App() {
   return (
     <div className="App">
-      {/* <UploadShrink /> */}
-      <Animation />
+      <Router location={location} routes={routes}>
+        <Outlet />
+      </Router>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "@emotion/styled";
 const frameCount = 21;
 const frames = Array.from(
   { length: frameCount },
