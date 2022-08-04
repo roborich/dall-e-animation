@@ -1,9 +1,10 @@
+import { Box, HStack } from "@chakra-ui/react";
 import { Link } from "@tanstack/react-location";
 export function Home() {
   return (
-    <div>
-      <Link to="/convert">Convert</Link>
+    <HStack spacing={4}>
       <Link to="/css-animation">Animation</Link>
-    </div>
+      <Link to="/create">Create</Link>
+    </HStack>
   );
 }

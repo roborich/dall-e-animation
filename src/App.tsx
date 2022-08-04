@@ -1,15 +1,15 @@
-import "./App.css";
-
 import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
 const location = new ReactLocation();
 import { routes } from "./routes";
+import { ChakraProvider } from "@chakra-ui/react";
+
 function App() {
   return (
-    <div className="App">
+    <ChakraProvider>
       <Router location={location} routes={routes}>
         <Outlet />
       </Router>
-    </div>
+    </ChakraProvider>
   );
 }
 
