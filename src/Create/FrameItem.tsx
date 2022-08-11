@@ -1,5 +1,5 @@
 import { Box, Button, Flex, IconButton, Image } from "@chakra-ui/react";
-import { CloseIcon, DownloadIcon } from "@chakra-ui/icons";
+import { CloseIcon, DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 import { Frame } from "./create-types";
 import React from "react";
 import {
@@ -31,14 +31,8 @@ export function FrameItem({
   }, [image, index, name]);
 
   return (
-    <Flex
-      borderColor="gray.100"
-      borderWidth="1px"
-      borderRadius="md"
-      p={4}
-      gap={4}
-    >
-      <Box fontSize="xx-large" alignSelf="center">
+    <Flex gap={4}>
+      <Box fontSize="x-large" alignSelf="center" flex="0 0 30px">
         {index + 1}
       </Box>
       <Image
@@ -48,27 +42,10 @@ export function FrameItem({
         w="100px"
         bg="gray.100"
       />
-      <Flex
-        flexDirection="column"
-        justifyContent="space-between"
-        flex="1 1 auto"
-      >
-        <Box fontSize="sm">{name}</Box>
-        {/* <Flex>
-          <Button
-            onClick={getScaledDownVersion}
-            size="sm"
-            alignSelf="end"
-            leftIcon={<DownloadIcon />}
-          >
-            Get scaled down version
-          </Button>
-        </Flex> */}
-      </Flex>
       <IconButton
         onClick={onRemoveFrameClicked}
         aria-label="Remove frame"
-        icon={<CloseIcon />}
+        icon={<DeleteIcon />}
         size="sm"
         variant="ghost"
       />
