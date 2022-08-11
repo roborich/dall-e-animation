@@ -1,10 +1,10 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon } from "@chakra-ui/react";
 
 import React, { useCallback, useEffect } from "react";
 import { FULL_CANVAS_SIZE } from "../constants";
 import { Frame, PlayType, AnimationState, AnimationType } from "./create-types";
 import { useCanvas } from "./useCanvas";
-
+import { HiHeart } from "react-icons/hi";
 import { record } from "./record";
 import { DownloadIcon, SpinnerIcon } from "@chakra-ui/icons";
 
@@ -83,6 +83,11 @@ export function Animation(props: {
         >
           {playType === PlayType.Recording ? "Recording" : "Export Video"}
         </Button>
+        <a href="https://www.buymeacoffee.com/roborich" target="_blank">
+          <Button leftIcon={<Icon as={HiHeart} color="red.500" />}>
+            Buy me some DALL·E 2 credits
+          </Button>
+        </a>
       </Box>
     </Flex>
   );

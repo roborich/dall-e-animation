@@ -1,6 +1,13 @@
 import React, { useCallback } from "react";
 import { use100vh } from "react-div-100vh";
-import { Divider, Flex, Grid, GridItem, Spinner } from "@chakra-ui/react";
+import {
+  Button,
+  Divider,
+  Flex,
+  Grid,
+  GridItem,
+  Spinner,
+} from "@chakra-ui/react";
 
 import { AnimationState, Frame } from "./create-types";
 
