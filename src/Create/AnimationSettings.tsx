@@ -38,10 +38,10 @@ export function AnimationSettings({
           }}
         >
           <Stack direction="column">
-            <Radio value={AnimationType.ZoomIn}>Zoom-out</Radio>
-            <Radio value={AnimationType.ZoomOut}>Zoom-in</Radio>
-            <Radio value={AnimationType.ZoomInOut}>Zoom-out/in</Radio>
-            <Radio value={AnimationType.ZoomOutIn}>Zoom-in/out</Radio>
+            <Radio value={AnimationType.ZoomOut}>Zoom-out</Radio>
+            <Radio value={AnimationType.ZoomIn}>Zoom-in</Radio>
+            <Radio value={AnimationType.ZoomOutIn}>Zoom-out/in</Radio>
+            <Radio value={AnimationType.ZoomInOut}>Zoom-in/out</Radio>
           </Stack>
         </RadioGroup>
       </FormControl>

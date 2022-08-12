@@ -97,10 +97,15 @@ export const animationTypeTimingMap: Record<
   AnimationType,
   (v: number) => number
 > = {
-  [AnimationType.ZoomIn]: (v) => v,
-  [AnimationType.ZoomOut]: (v) => 1 - v,
-  [AnimationType.ZoomInOut]: (v) => (v > 0.5 ? 1 - v : v) * 2,
-  [AnimationType.ZoomOutIn]: (v) => (v < 0.5 ? 1 - v : v) / 2,
+  [AnimationType.ZoomIn]: (v) => 1 - v,
+  [AnimationType.ZoomOut]: (v) => v,
+  [AnimationType.ZoomInOut]: (v) => {
+    const n = 1 - v;
+    return (n < 0.5 ? 1 - n : n) * 2 - 1;
+  },
+  [AnimationType.ZoomOutIn]: (v) => {
+    return (v > 0.5 ? 1 - v : v) * 2;
+  },
 };
 
 function calculateTime(state: AnimationState) {
