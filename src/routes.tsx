@@ -14,10 +14,14 @@ import { Create } from "./Create";
 export const routes: Route[] = [
   {
     path: "/",
-    element: <Navigate to={"/create"} />,
+    element: <Navigate to="/zoom-animation" fromCurrent key="/" />,
   },
   {
-    path: "/create",
+    path: "/zoom-animation",
     element: <Create />,
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" fromCurrent key="*" />,
   },
 ];

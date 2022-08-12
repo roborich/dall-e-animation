@@ -85,7 +85,7 @@ export function Animation(props: {
         </Button>
         <a href="https://www.buymeacoffee.com/roborich" target="_blank">
           <Button leftIcon={<Icon as={HiHeart} color="red.500" />}>
-            Buy me some DALL·E 2 credits
+            Buy me credits
           </Button>
         </a>
       </Box>
