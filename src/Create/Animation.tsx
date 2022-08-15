@@ -24,8 +24,8 @@ const useAnimationFrameCallback = (
     runId.current = Symbol();
     const run = (id: Symbol) => {
       if (id === runId.current) {
-        cb();
         requestAnimationFrame(() => run(id));
+        cb();
       }
     };
     run(runId.current);
@@ -56,6 +56,14 @@ export function Animation(props: {
     runFrame(ctxRef.current, animationState.current);
   }, []);
 
+  const startRecording = React.useCallback(() => {
+    setPlayType(PlayType.Recording);
+    record(ctxRef.current!, animationState.current).then(() => {
+      setPlayType(PlayType.Auto);
+      animationState.current.start = Date.now();
+    });
+  }, []);
+
   return (
     <Flex
       alignItems="center"
@@ -72,13 +80,7 @@ export function Animation(props: {
           leftIcon={
             playType === PlayType.Recording ? <SpinnerIcon /> : <DownloadIcon />
           }
-          onClick={() => {
-            setPlayType(PlayType.Recording);
-            record(ctxRef.current!, animationState.current).then(() => {
-              setPlayType(PlayType.Auto);
-              animationState.current.start = Date.now();
-            });
-          }}
+          onClick={startRecording}
           disabled={playType === PlayType.Recording || props.frames.length < 2}
         >
           {playType === PlayType.Recording ? "Recording" : "Export Video"}
@@ -108,15 +110,11 @@ export const animationTypeTimingMap: Record<
   },
 };
 
-function calculateTime(state: AnimationState) {
+function calculateTime(elapsed: number, state: AnimationState) {
   let t = 0;
-  const elapsed = Date.now() - state.start;
   t = (elapsed % state.length) / state.length;
   t = animationTypeTimingMap[state.animationType](t);
   t = state.easingFunction(t);
-  if (elapsed >= state.length) {
-    state.recordingCallback?.();
-  }
   t = t * (state.images.length - 1);
   return t;
 }
@@ -129,12 +127,13 @@ function runFrame(ctx: CanvasRenderingContext2D, state: AnimationState) {
     ctx.drawImage(state.images[0].image, 0, 0);
     return;
   }
-
-  const t = calculateTime(state);
+  const elapsed = Date.now() - state.start;
+  const t = calculateTime(elapsed, state);
 
   ctx.clearRect(0, 0, FULL_CANVAS_SIZE, FULL_CANVAS_SIZE);
 
   state.images.forEach(drawImageAtScale(ctx, state, t));
+  state.recordingCallback?.(elapsed);
 }
 
 function drawImageAtScale(

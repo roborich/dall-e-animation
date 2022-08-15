@@ -17,6 +17,7 @@
     "@tanstack/react-location": "^3.7.4",
     "bezier-easing": "^2.1.0",
     "bezier-easing-editor": "^0.8.0",
+    "canvas-capture": "^2.0.4",
     "framer-motion": "^6.5.1",
     "localforage": "^1.10.0",
     "react": "^18.2.0",

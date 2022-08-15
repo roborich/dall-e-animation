@@ -78,6 +78,7 @@ const HALF_SIZE = FULL_CANVAS_SIZE / 2;
 const MAX_ALPHA = 255;
 const MASK_DEPTH = 100;
 const ALPHA_STEP = MAX_ALPHA / MASK_DEPTH;
+
 export const getMaskedImage = (image: HTMLImageElement) => {
   const imageData = getImageData(image);
   const max = FULL_CANVAS_SIZE * FULL_CANVAS_SIZE * 4;

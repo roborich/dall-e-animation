@@ -32,7 +32,7 @@ export interface AnimationState {
   bezier: Bezier;
   easingFunction: EasingFunction;
   animationType: AnimationType;
-  recordingCallback: null | VoidFunction;
+  recordingCallback: null | ((elapsedTime: number) => void);
 }
 export interface SaveState {
   animationType: AnimationType;
