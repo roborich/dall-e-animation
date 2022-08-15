@@ -20,7 +20,6 @@ export function Create() {
   const [frames, setFrames] = React.useState<Frame[]>([]);
   const animationState = React.useRef<AnimationState>(defaultState);
   const [imageScale, setImageScale] = React.useState(defaultState.imageScale);
-  const frameCount = frames.length;
 
   React.useEffect(() => {
     animationState.current.images = frames;

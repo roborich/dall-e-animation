@@ -1,8 +1,23 @@
-import { Box, Button, Flex, Icon } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Icon,
+  Select,
+  SelectField,
+} from "@chakra-ui/react";
 
 import React, { useCallback, useEffect } from "react";
 import { FULL_CANVAS_SIZE } from "../constants";
-import { Frame, PlayType, AnimationState, AnimationType } from "./create-types";
+import {
+  Frame,
+  PlayType,
+  AnimationState,
+  AnimationType,
+  Bitrate,
+} from "./create-types";
 import { useCanvas } from "./useCanvas";
 import { HiHeart } from "react-icons/hi";
 import { record } from "./record";
@@ -69,23 +84,49 @@ export function Animation(props: {
       <Box>
         <canvas ref={canvasRef} style={{ height: "90vh" }}></canvas>
       </Box>
-      <Box>
-        <Button
-          m={4}
-          leftIcon={
-            playType === PlayType.Recording ? <SpinnerIcon /> : <DownloadIcon />
-          }
-          onClick={startRecording}
-          disabled={playType === PlayType.Recording || props.frames.length < 2}
-        >
-          {playType === PlayType.Recording ? "Recording" : "Export Video"}
-        </Button>
-        <a href="https://www.buymeacoffee.com/roborich" target="_blank">
-          <Button leftIcon={<Icon as={HiHeart} color="red.500" />}>
-            Buy me credits
+      <Flex flexDirection="row" gap={4} m={4} alignItems="center">
+        <Flex alignItems="center">
+          <FormLabel color="white">Bitrate</FormLabel>
+          <Select
+            bg="white"
+            w="150px"
+            color="gray.600"
+            defaultValue={animationState.current.bitrate}
+            onChange={(e) => {
+              animationState.current.bitrate = Number(e.target.value);
+            }}
+          >
+            <option value={Bitrate.Low}>Low</option>
+            <option value={Bitrate.Medium}>Medium</option>
+            <option value={Bitrate.High}>High</option>
+            <option value={Bitrate.Max}>Max</option>
+          </Select>
+        </Flex>
+        <Box>
+          <Button
+            leftIcon={
+              playType === PlayType.Recording ? (
+                <SpinnerIcon />
+              ) : (
+                <DownloadIcon />
+              )
+            }
+            onClick={startRecording}
+            disabled={
+              playType === PlayType.Recording || props.frames.length < 2
+            }
+          >
+            {playType === PlayType.Recording ? "Recording" : "Export Video"}
           </Button>
-        </a>
-      </Box>
+        </Box>
+        <Box>
+          <a href="https://www.buymeacoffee.com/roborich" target="_blank">
+            <Button leftIcon={<Icon as={HiHeart} color="red.500" />}>
+              Buy me credits
+            </Button>
+          </a>
+        </Box>
+      </Flex>
     </Flex>
   );
 }

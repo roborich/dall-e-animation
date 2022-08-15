@@ -5,6 +5,7 @@ import {
   StoredFrame,
   AnimationState,
   AnimationType,
+  Bitrate,
 } from "./create-types";
 import { Bezier } from "bezier-easing-editor";
 import BezierEasing from "bezier-easing";
@@ -47,12 +48,16 @@ export const getDataFromJsonFile = <T extends {}>(file: File) =>
 export const convertStateToSave = ({
   animationType,
   bezier,
+  bitrate,
   images,
+  imageScale,
   length,
 }: AnimationState): SaveState => ({
   animationType,
   bezier,
+  bitrate,
   images: images.map(frameToStoredFrame),
+  imageScale,
   length,
 });
 
@@ -69,6 +74,7 @@ const defaultBezier: Bezier = [0.3, 0.1, 0.7, 0.9];
 export const defaultState: AnimationState = {
   animationType: AnimationType.ZoomOut,
   bezier: defaultBezier,
+  bitrate: Bitrate.High,
   easingFunction: BezierEasing(...defaultBezier),
   images: [],
   imageScale: 0.3,
@@ -80,13 +86,17 @@ export const defaultState: AnimationState = {
 export const convertSaveToState = async ({
   animationType,
   bezier,
+  bitrate,
   images,
+  imageScale,
   length,
 }: SaveState): Promise<AnimationState> => ({
   ...defaultState,
   animationType,
   bezier,
-  images: await Promise.all(images.map(storedFrameToFrame)),
-  length,
+  bitrate: bitrate ?? defaultState.bitrate,
   easingFunction: BezierEasing(...bezier),
+  images: await Promise.all(images.map(storedFrameToFrame)),
+  imageScale: imageScale ?? defaultState.imageScale,
+  length,
 });

@@ -23,6 +23,14 @@ export enum AnimationType {
   ZoomInOut = "zoom-in-out",
   ZoomOutIn = "zoom-out-in",
 }
+
+export enum Bitrate {
+  Low,
+  Medium,
+  High,
+  Max,
+}
+
 export type ClockFunction = (cb: VoidFunction) => void;
 
 export interface AnimationState {
@@ -31,6 +39,7 @@ export interface AnimationState {
   start: number;
   length: number;
   bezier: Bezier;
+  bitrate: Bitrate;
   easingFunction: EasingFunction;
   animationType: AnimationType;
   recordingCallback: null | ((elapsedTime: number) => void);
@@ -40,4 +49,6 @@ export interface SaveState {
   bezier: Bezier;
   images: StoredFrame[];
   length: number;
+  imageScale: number;
+  bitrate: Bitrate;
 }

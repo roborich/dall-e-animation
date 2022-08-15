@@ -1,11 +1,17 @@
-import { AnimationState } from "./create-types";
-// import { CanvasCapture } from "canvas-capture";
+import { AnimationState, Bitrate } from "./create-types";
 
 const mimeTypes = [
   "video/webm;codecs=vp9",
   "video/webm;codecs=vp8",
   "video/webm",
 ];
+
+const bitrateMap: Record<Bitrate, number> = {
+  [Bitrate.Low]: 1_000_000,
+  [Bitrate.Medium]: 8_000_000,
+  [Bitrate.High]: 80_000_000,
+  [Bitrate.Max]: 1_000_000_000_000,
+};
 const mimeType: string | undefined = mimeTypes.filter((type) =>
   MediaRecorder.isTypeSupported(type),
 )[0];
@@ -18,13 +24,19 @@ export const record = (
   state: AnimationState,
 ) => {
   const videoStream = ctx.canvas.captureStream(30);
+  const bitrate = bitrateMap[state.bitrate];
   const options: MediaRecorderOptions = {
-    videoBitsPerSecond: 8_000_000,
+    videoBitsPerSecond: bitrate,
   };
   if (mimeType) {
     options.mimeType = mimeType;
   }
   const mediaRecorder = new MediaRecorder(videoStream, options);
+  console.log({
+    chosenBitrate: bitrate,
+    actualBitrate: mediaRecorder.videoBitsPerSecond,
+    difference: bitrate - mediaRecorder.videoBitsPerSecond,
+  });
 
   const chunks: Blob[] = [];
   mediaRecorder.ondataavailable = function (e) {
