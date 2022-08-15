@@ -14,6 +14,7 @@ import { AnimationState, Frame, SaveState } from "./create-types";
 interface UploadInputProps {
   frames: Frame[];
   setFrames: React.Dispatch<React.SetStateAction<Frame[]>>;
+  setImageScale: React.Dispatch<React.SetStateAction<number>>;
   animationState: React.MutableRefObject<AnimationState>;
   isUploading: boolean;
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,7 @@ export function UploadProject({
   frames,
   animationState,
   setFrames,
+  setImageScale,
   isUploading,
   setIsUploading,
 }: UploadInputProps) {
@@ -44,6 +46,9 @@ export function UploadProject({
       const state = await convertSaveToState(data);
       animationState.current = state;
       setFrames(state.images);
+      if (state.imageScale) {
+        setImageScale(state.imageScale);
+      }
       setIsUploading(false);
     },
     [],

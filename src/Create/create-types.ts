@@ -27,6 +27,7 @@ export type ClockFunction = (cb: VoidFunction) => void;
 
 export interface AnimationState {
   images: Frame[];
+  imageScale: number;
   start: number;
   length: number;
   bezier: Bezier;

@@ -44,11 +44,6 @@ export function Animation(props: {
   const [playType, setPlayType] = React.useState(PlayType.Auto);
   const { canvasRef, ctxRef } = useCanvas();
 
-  useEffect(() => {
-    animationState.current.start = Date.now();
-    animationState.current.images = props.frames;
-  }, [props.frames]);
-
   useAnimationFrameCallback(() => {
     if (ctxRef.current == null) {
       return;
@@ -138,12 +133,12 @@ function runFrame(ctx: CanvasRenderingContext2D, state: AnimationState) {
 
 function drawImageAtScale(
   ctx: CanvasRenderingContext2D,
-  { images }: AnimationState,
+  { images, imageScale }: AnimationState,
   t: number,
 ) {
   return ({ image, maskedImage }: Frame, index: number) => {
     const negativeIndex = images.length - index - 1;
-    const scale = 0.3 ** (t - negativeIndex);
+    const scale = imageScale ** (t - negativeIndex);
     if (scale < 0.1 || scale > 4.5) {
       return;
     }

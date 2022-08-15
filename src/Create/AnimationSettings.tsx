@@ -20,7 +20,11 @@ import React from "react";
 import { AnimationState, AnimationType } from "./create-types";
 
 import BezierEditor from "bezier-easing-editor";
-
+const labelStyles = {
+  mt: "2",
+  ml: "-2.5",
+  fontSize: "sm",
+};
 export function AnimationSettings({
   animationState,
 }: {

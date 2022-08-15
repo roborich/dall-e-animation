@@ -67,13 +67,14 @@ export const downloadJSON = <T extends {}>(data: T, name: string) => {
 const defaultBezier: Bezier = [0.3, 0.1, 0.7, 0.9];
 
 export const defaultState: AnimationState = {
-  images: [],
-  start: Date.now(),
-  length: 5_000,
-  bezier: defaultBezier,
   animationType: AnimationType.ZoomOut,
+  bezier: defaultBezier,
   easingFunction: BezierEasing(...defaultBezier),
+  images: [],
+  imageScale: 0.3,
+  length: 5_000,
   recordingCallback: null,
+  start: Date.now(),
 };
 
 export const convertSaveToState = async ({
