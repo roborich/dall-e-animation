@@ -86,7 +86,7 @@ export function Animation(props: {
       </Box>
       <Flex flexDirection="row" gap={4} m={4} alignItems="center">
         <Flex alignItems="center">
-          <FormLabel color="white">Bitrate</FormLabel>
+          <FormLabel color="white">Video quality</FormLabel>
           <Select
             bg="white"
             w="150px"
@@ -96,10 +96,10 @@ export function Animation(props: {
               animationState.current.bitrate = Number(e.target.value);
             }}
           >
-            <option value={Bitrate.Low}>Low</option>
-            <option value={Bitrate.Medium}>Medium</option>
-            <option value={Bitrate.High}>High</option>
-            <option value={Bitrate.Max}>Max</option>
+            <option value={Bitrate.Low}>Meh</option>
+            <option value={Bitrate.Medium}>Good</option>
+            <option value={Bitrate.High}>Better</option>
+            <option value={Bitrate.Max}>Best</option>
           </Select>
         </Flex>
         <Box>

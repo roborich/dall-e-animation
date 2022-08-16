@@ -74,7 +74,7 @@ const defaultBezier: Bezier = [0.3, 0.1, 0.7, 0.9];
 export const defaultState: AnimationState = {
   animationType: AnimationType.ZoomOut,
   bezier: defaultBezier,
-  bitrate: Bitrate.High,
+  bitrate: Bitrate.Medium,
   easingFunction: BezierEasing(...defaultBezier),
   images: [],
   imageScale: 0.3,
