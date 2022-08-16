@@ -112,7 +112,7 @@ export function PaddedImageDownload({
             maxW="200px"
             defaultValue={imageScale}
             min={0.3}
-            max={0.6}
+            max={0.5}
             step={0.1}
             isDisabled={scaleIsLocked}
             onChange={setImageScale}
@@ -125,9 +125,6 @@ export function PaddedImageDownload({
             </SliderMark>
             <SliderMark value={0.5} {...labelStyles}>
               50%
-            </SliderMark>
-            <SliderMark value={0.6} {...labelStyles}>
-              60%
             </SliderMark>
             <SliderTrack bg="gray.300">
               <Box position="relative" right={10} />
